@@ -3,16 +3,19 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#f7f6f2">
+  <meta name="color-scheme" content="light dark">
   <meta name="description" content="拾光 SnapNest：粘贴截图，添加质感背景、窗口边框和隐私遮挡，一键导出。免费、无水印，图片仅在浏览器本地处理。">
   <title>拾光 SnapNest — 让截图，值得分享。</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <script src="./appearance.js"></script>
   <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./appearance.css">
 </head>
 <body>
 <header class="header">
   <a class="brand" href="./" aria-label="拾光首页"><span class="brand-icon">✳</span><b>拾光<span>SnapNest</span></b></a>
   <nav aria-label="主导航"><span class="nav-current">截图工作台</span><button id="guideBtn">使用指南 <span>↗</span></button></nav>
-  <div class="header-right"><span class="local-badge"><i></i> 图片仅在本地处理</span><a class="source-link" href="https://github.com/batype/snapnest" target="_blank" rel="noopener noreferrer">↗ GitHub <span class="mit">MIT</span></a></div>
+  <div class="header-right"><span class="local-badge"><i></i> 图片仅在本地处理</span><select class="appearance-select" id="appearance" aria-label="界面外观"><option value="system">◐ 跟随系统</option><option value="light">☀ 亮色模式</option><option value="dark">☾ 暗色模式</option></select><a class="source-link" href="https://github.com/batype/snapnest" target="_blank" rel="noopener noreferrer">↗ GitHub <span class="mit">MIT</span></a></div>
 </header>
 <main>
   <section class="intro">

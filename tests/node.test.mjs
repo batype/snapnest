@@ -50,6 +50,6 @@ test('API and CLI protect existing files and provide working package entry point
     await assert.rejects(run(process.execPath,[cli,src,'--out',dest]));
     await assert.rejects(run(process.execPath,[cli,src,'--unknown']));
     assert.match((await run(process.execPath,[cli,'--help'])).stdout,/Usage/);
-    assert.match((await run(process.execPath,[cli,'--version'])).stdout,/1\.1\.0/);
+    assert.match((await run(process.execPath,[cli,'--version'])).stdout,/1\.2\.0/);
   }finally{await rm(dir,{recursive:true,force:true});}
 });
