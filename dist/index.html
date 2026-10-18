@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f7f6f2">
+  <meta name="description" content="拾光 SnapNest：粘贴截图，添加质感背景、窗口边框和隐私遮挡，一键导出。免费、无水印，图片仅在浏览器本地处理。">
+  <title>拾光 SnapNest — 让截图，值得分享。</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="header">
+  <a class="brand" href="./" aria-label="拾光首页"><span class="brand-icon">✳</span><b>拾光<span>SnapNest</span></b></a>
+  <nav aria-label="主导航"><span class="nav-current">截图工作台</span><button id="guideBtn">使用指南 <span>↗</span></button></nav>
+  <div class="header-right"><span class="local-badge"><i></i> 图片仅在本地处理</span><a class="source-link" href="https://github.com/batype/snapnest" target="_blank" rel="noopener noreferrer">↗ GitHub <span class="mit">MIT</span></a></div>
+</header>
+<main>
+  <section class="intro">
+    <div><div class="eyebrow"><span></span> SMALL TOOL. BIG DIFFERENCE.</div><h1>让截图，<em>值得分享。</em></h1><p>给日常截图一点设计感。粘贴、调整、分享，就这么简单。</p></div>
+    <div class="intro-note"><span class="sparkle">✧</span> 好内容，也值得好看的出场。<small>免费使用 · 无水印 · 无需注册</small></div>
+  </section>
+  <section class="workspace" aria-label="截图编辑器">
+    <div class="editor">
+      <div class="editor-toolbar"><div class="file-info"><span class="file-icon">▧</span><div><b id="fileName">灵感看板 · 示例</b><small id="imageInfo">使用示例，或粘贴你的截图</small></div></div><button class="button small" id="uploadBtn"><span>＋</span> 添加图片</button></div>
+      <div class="stage-wrap" id="dropZone">
+        <div class="stage-topline"><span><i></i> 实时预览</span><span id="canvasSize">1200 × 900</span></div>
+        <div class="canvas-holder" id="canvasHolder"><canvas id="preview" aria-label="美化后的截图预览">你的浏览器需要支持 Canvas 才能使用此工具。</canvas></div>
+        <div class="stage-hint" id="stageHint"><kbd>⌘ / Ctrl</kbd> + <kbd>V</kbd> 粘贴截图 <span>或将图片拖到这里</span></div>
+        <div class="drop-overlay">松开，开始创作 <small>支持 PNG / JPG / WebP</small></div>
+      </div>
+      <div class="presets"><div class="section-row"><b>一键换个氛围</b><span>为不同的灵感，找到合适的底色</span></div><div class="preset-list" id="presetList"></div></div>
+      <div class="editor-foot"><span><span class="lock-icon">♧</span> 图片不上传服务器，关闭页面即释放</span><button id="demoBtn">试试示例 ↻</button></div>
+    </div>
+    <aside class="settings">
+      <div class="settings-heading"><div><span class="eyebrow">MAKE IT YOURS</span><h2>你的分享风格</h2></div><button class="icon-button" id="resetBtn" aria-label="重置样式" title="重置样式">↺</button></div>
+      <div class="tabs" role="tablist" aria-label="编辑设置"><button role="tab" id="tab-background" aria-controls="panel-background" aria-selected="true" data-tab="background">背景</button><button role="tab" id="tab-layout" aria-controls="panel-layout" aria-selected="false" data-tab="layout" tabindex="-1">布局</button><button role="tab" id="tab-privacy" aria-controls="panel-privacy" aria-selected="false" data-tab="privacy" tabindex="-1">遮挡</button></div>
+      <div class="panel" id="panel-background" role="tabpanel" aria-labelledby="tab-background">
+        <div class="setting-group"><label>背景颜色 <span id="themeName">落日奶油</span></label><div class="swatch-grid" id="swatches"></div></div>
+        <div class="setting-group custom-colors"><label>自定义渐变</label><div><label class="color-field"><input id="colorA" type="color" value="#f5c6aa" aria-label="渐变起始颜色"><span id="colorAText">#F5C6AA</span></label><span>→</span><label class="color-field"><input id="colorB" type="color" value="#f6e4bb" aria-label="渐变结束颜色"><span id="colorBText">#F6E4BB</span></label></div></div>
+        <div class="setting-group"><label for="padding">画面留白 <output id="paddingValue">64 px</output></label><input type="range" id="padding" min="16" max="140" value="64"><div class="range-ends"><span>紧凑</span><span>呼吸感</span></div></div>
+        <div class="setting-group"><label for="radius">圆角 <output id="radiusValue">16 px</output></label><input type="range" id="radius" min="0" max="40" value="16"></div>
+        <div class="setting-group"><label for="shadow">阴影 <output id="shadowValue">40%</output></label><input type="range" id="shadow" min="0" max="80" value="40"></div>
+      </div>
+      <div class="panel" id="panel-layout" role="tabpanel" aria-labelledby="tab-layout" hidden>
+        <div class="setting-group"><label for="ratio">画布比例</label><select id="ratio"><option value="auto">自适应 · 原图比例</option><option value="4:3">4:3 · 日常分享</option><option value="1:1">1:1 · 社交动态</option><option value="3:4">3:4 · 竖版笔记</option><option value="16:9">16:9 · 演示封面</option></select></div>
+        <div class="setting-group toggle-row"><label for="browserFrame">浏览器边框<small>给产品截图加一点仪式感</small></label><input type="checkbox" role="switch" id="browserFrame" checked></div>
+        <div class="setting-group"><label for="caption">底部标题 <span>可选</span></label><input id="caption" type="text" placeholder="记录一个值得分享的瞬间" maxlength="40"><p class="field-note">最多 40 字，标题会一起导出</p></div>
+        <div class="tip-card"><span>✧</span><b>让画面多一点呼吸</b><p>横版截图适合 4:3；想发社交动态，可以试试 1:1。原图始终完整呈现。</p></div>
+      </div>
+      <div class="panel" id="panel-privacy" role="tabpanel" aria-labelledby="tab-privacy" hidden>
+        <div class="privacy-intro"><span>▨</span><h3>分享之前，藏好隐私。</h3><p>开启遮挡后，在截图内容上拖动，盖住姓名、邮箱或其他敏感信息。</p></div>
+        <button class="button full" id="redactBtn" aria-pressed="false">＋ 开启遮挡模式</button>
+        <div class="redact-actions"><button class="button small" id="undoBtn" disabled>撤销一处</button><button class="button small" id="clearBtn" disabled>清空遮挡</button></div>
+        <p class="field-note" id="maskCount">还没有添加遮挡</p>
+        <div class="tip-card"><b>实心遮挡，更放心</b><p>导出时，选中区域会被实心色块覆盖。请在分享前检查导出图片是否完整遮住了敏感内容。</p></div>
+      </div>
+      <div class="export-panel"><div class="export-options"><label for="format">导出格式</label><select id="format"><option value="png">PNG · 清晰无损</option><option value="jpeg">JPG · 更小体积</option></select></div><div class="export-quality"><label for="scale">图片尺寸</label><select id="scale"><option value="1">1× · 标准</option><option value="2" selected>2× · 高清</option></select></div><button class="button primary full" id="downloadBtn"><span>↓</span> 下载图片 <span class="export-arrow">↗</span></button><button class="button full copy-btn" id="copyBtn">▣ 复制图片到剪贴板</button><p class="export-note" id="exportInfo">无水印，保留你的每一份灵感</p></div>
+    </aside>
+  </section>
+  <section class="benefits"><div><span>01 /</span><b>一粘贴，就开始</b><p>不注册，不打断你的工作流。</p></div><div><span>02 /</span><b>你的图片，只属于你</b><p>所有图片处理都在浏览器内完成。</p></div><div><span>03 /</span><b>轻一点，也好看一点</b><p>纯前端、零运行依赖、MIT 许可。</p></div></section>
+</main>
+<footer><span class="footer-brand">✳ 拾光 SnapNest</span><span>把日常的小事，做得好看一点。</span><a href="https://github.com/batype/snapnest" target="_blank" rel="noopener noreferrer">GitHub 开源项目 ↗</a></footer>
+<input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+<div id="toast" role="status" aria-live="polite"></div>
+<dialog id="guideDialog"><div class="dialog-head"><h2>三步，把截图变成作品。</h2><button class="icon-button" id="closeGuide" aria-label="关闭指南">×</button></div><ol><li><b>添加你的截图</b><p>直接粘贴、拖入图片，或点击「添加图片」。支持 PNG、JPG 和 WebP，单张不超过 25 MB、2400 万像素。</p></li><li><b>选一种喜欢的风格</b><p>挑选背景，调整圆角、留白和比例。需要隐藏敏感信息时，在「遮挡」中开启模式并拖动框选。</p></li><li><b>带着好心情分享</b><p>导出 PNG / JPG，或复制图片。剪贴板功能需要 HTTPS 或 localhost，并取决于浏览器支持；下载始终可用。</p></li></ol><div class="dialog-note">图片只在内存中处理；只将样式偏好保存在此浏览器。无统计脚本，无图片上传，无强制水印。</div><a class="button full" href="./snapnest-source.zip" download>获取 MIT 开源代码 ↗</a></dialog>
+<script type="module" src="./app.mjs"></script>
+</body></html>
