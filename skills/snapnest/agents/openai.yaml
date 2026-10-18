@@ -1,0 +1,4 @@
+interface:
+  display_name: "拾光 SnapNest"
+  short_description: "在本地美化截图、制作分享配图并精确遮挡敏感区域，输出高清 PNG/JPG"
+  default_prompt: "使用 $snapnest 把这张截图美化成适合分享的图片，保留完整内容，并按我的要求遮挡敏感区域。"

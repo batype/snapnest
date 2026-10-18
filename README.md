@@ -2,7 +2,7 @@
 
 **让截图，值得分享。** 本地截图美化与隐私遮挡：一个纯前端网页工具，以及可以在脚本和 CI 中使用的 Node.js API / CLI。
 
-[在线使用](https://batype.github.io/snapnest/) · [下载发行版](https://github.com/batype/snapnest/releases) · [报告问题](https://github.com/batype/snapnest/issues) · [MIT 许可证](LICENSE)
+[在线使用](https://batype.github.io/snapnest/) · [AI Skill](skills/snapnest/SKILL.md) · [下载发行版](https://github.com/batype/snapnest/releases) · [报告问题](https://github.com/batype/snapnest/issues) · [MIT 许可证](LICENSE)
 
 ![拾光 SnapNest 工作台](assets/preview.png)
 
@@ -102,6 +102,36 @@ console.log(themes);
 
 参数和 TypeScript 类型见 [node/index.d.ts](node/index.d.ts)。参数约束：padding 16–140、radius 0–40、shadow 0–80、scale 1 或 2；颜色使用 `#RRGGBB`；caption 最多 40 个字符。Node 使用 SVG / sharp，网页使用 Canvas，共享布局逻辑；字体与光栅化随系统而异，不承诺像素完全一致。
 
+## 给 AI 使用：SnapNest Skill
+
+仓库提供可安装的 [snapnest skill](skills/snapnest/SKILL.md)，让支持本地技能与命令执行的 AI 根据自然语言调用已发布的 npm CLI，不需要操作网页或申请 API Key。它包含风格与分享比例选择、遮挡坐标规则、输出保护和结果检查说明。
+
+在 Codex 中，可以让内置 skill-installer 安装：
+
+```text
+使用 $skill-installer 安装 https://github.com/batype/snapnest/tree/main/skills/snapnest
+```
+
+也可在克隆本仓库后手动复制（如果已有同名 skill，请先检查内容，不要直接覆盖）：
+
+```sh
+task_skill_dir="${CODEX_HOME:-$HOME/.codex}/skills"
+mkdir -p "$task_skill_dir"
+test ! -e "$task_skill_dir/snapnest" && cp -R skills/snapnest "$task_skill_dir/snapnest"
+```
+
+安装后的使用示例：
+
+```text
+$snapnest 把这张截图做成抹茶绿的 4:3 分享图，输出高清 PNG。
+$snapnest 把 ./screenshot.png 做成暗色方图，并遮住右上角的邮箱。
+$snapnest 将这张产品截图做成 16:9 演示封面，不加浏览器边框。
+```
+
+首次执行可能需要联网下载 `@batype/snapnest@1.2.0` 及 sharp 依赖；图片处理在本地完成。Node.js 需要 >=20.9.0。skill 不提供自动 OCR 脱敏，也不会自行上传结果；AI 需要查看原图并确认遮挡覆盖范围。
+
+其他支持 `SKILL.md` 的 AI 工具可以使用同一份指令文件，并按各自的技能安装方式配置。该 skill 通过 GitHub 分发；npm 包继续提供 API 与 CLI，无需为安装 skill 重新发布 npm 版本。
+
 ## GitHub Pages
 
 推送到 `main` 后，[Pages workflow](.github/workflows/pages.yml) 会：
@@ -134,6 +164,7 @@ node/                   Node.js API 和 TypeScript 类型
 bin/snapnest.mjs        命令行入口
 scripts/                静态服务器和零依赖源码 ZIP 构建
 tests/                  网页核心与 Node / CLI 集成测试
+skills/snapnest/        AI 可用的截图美化与隐私遮挡 skill
 .github/workflows/      测试与 Pages 自动部署
 assets/                 原创界面预览
 docs/                   选题分析、发布方案和验证记录
