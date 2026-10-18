@@ -14,6 +14,7 @@
 - 实心隐私遮挡，支持撤销和清空，遮挡写入导出像素。
 - PNG / JPG、1× / 2× 导出；浏览器支持时可复制 PNG。
 - 中文响应式界面、样式记忆；无水印、无登录、无图片上传。
+- 亮色 / 暗色 / 跟随系统模式：在右上角切换，记住偏好并同步浏览器内其他标签页；只影响工作台外观，不改变导出图片。
 - Node API、TypeScript 类型声明和命令行；适合自动生成项目展示图。
 
 **网页零运行依赖；Node 图片渲染使用 sharp。** 页面不会加载 Node 依赖或连接任何图片处理 API。
@@ -41,19 +42,19 @@ npm run build
 
 ## 安装 Node 插件
 
-目前提供 **GitHub 安装和 Release 中的 npm 压缩包**，尚未发布到 npm 公共注册表。不要使用 `npm install @batype/snapnest`，请使用下面的安装方式。
+从 npmjs 公共注册表安装（Node.js >=20.9.0）：
 
 ```sh
-npm install github:batype/snapnest#v1.1.0
+npm install @batype/snapnest
 ```
 
 无需长期安装时：
 
 ```sh
-npx --yes --package=github:batype/snapnest#v1.1.0 snapnest ./screenshot.png --out ./share.png --theme matcha
+npx --yes --package=@batype/snapnest snapnest ./screenshot.png --out ./share.png --theme matcha
 ```
 
-也可克隆后执行 `npm ci`，然后运行 `node bin/snapnest.mjs`。Node 原生图片依赖由 sharp 为支持的平台提供；离线环境需提前准备依赖。
+也可从 [Release](https://github.com/batype/snapnest/releases) 下载 tgz 后安装，或克隆后执行 `npm ci`，然后运行 `node bin/snapnest.mjs`。Node 原生图片依赖由 sharp 为支持的平台提供；离线环境需提前准备依赖。
 
 ### 命令行 CLI
 
