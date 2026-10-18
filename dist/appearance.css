@@ -46,8 +46,8 @@ html[data-appearance="dark"] .privacy-intro p { color:#b3c49f; }
 html[data-appearance="dark"] #redactBtn[aria-pressed="true"] { background:#a5c09a; border-color:#a5c09a; color:#1d2a1a; }
 html[data-appearance="dark"] .export-panel { background:#1e271f; }
 html[data-appearance="dark"] :is(.export-options,.export-quality,.export-note) { color:#b6c5a3; }
-html[data-appearance="dark"] .primary { color:#1d281d; background:#d3dfbf; border-color:#d3dfbf; }
-html[data-appearance="dark"] .primary:hover { background:#e3eccf; border-color:#e3eccf; }
+html[data-appearance="dark"] .button.primary { color:#1d281d; background:#d3dfbf; border-color:#d3dfbf; }
+html[data-appearance="dark"] .button.primary:hover { background:#e3eccf; border-color:#e3eccf; }
 html[data-appearance="dark"] .export-arrow { color:#5c704b; }
 html[data-appearance="dark"] .copy-btn { color:#c4d3b1; }
 html[data-appearance="dark"] .benefits>div>span { color:#91a27e; }
